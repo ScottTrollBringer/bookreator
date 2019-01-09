@@ -1,0 +1,26 @@
+{
+  "name": "bookreator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ScottTrollBringer/bookreator.git"
+  },
+  "author": "Ian Fraser",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ScottTrollBringer/bookreator/issues"
+  },
+  "homepage": "https://github.com/ScottTrollBringer/bookreator#readme",
+  "dependencies": {
+    "@types/express": "^4.16.0",
+    "express": "^4.16.4"
+  }
+}
