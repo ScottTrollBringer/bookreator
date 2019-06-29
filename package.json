@@ -2,7 +2,7 @@
   "name": "bookreator",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "",
   "directories": {
     "test": "tests"
   },
@@ -20,14 +20,9 @@
   },
   "homepage": "https://github.com/ScottTrollBringer/bookreator#readme",
   "dependencies": {
-    "@types/express": "^4.16.0",
-    "express": "^4.16.4",
     "jest": "^23.6.0",
     "jsverify": "^0.8.4"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.12",
-    "ts-jest": "^23.10.5",
-    "typescript": "^3.2.2"
   }
 }
