@@ -153,6 +153,7 @@ cabal.project.local
 cabal.project.local~
 .HTF/
 .ghc.environment.*
+*.lock
 
 # Elm stuff
 # User-specific stuff:
