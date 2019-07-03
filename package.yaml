@@ -2,16 +2,16 @@ name:                bookreator
 version:             0.1.0.0
 github:              "githubuser/bookreator"
 license:             BSD3
-author:              "Author name here"
-maintainer:          "example@example.com"
-copyright:           "2019 Author name here"
+author:              "Ian FRASER"
+maintainer:          "ian.hc.fraser@gmail.com"
+copyright:           "2019 Ian FRASER"
 
 extra-source-files:
 - README.md
 - ChangeLog.md
 
 # Metadata used when publishing your package
-# synopsis:            Short description of your package
+# synopsis:            Dynamic book generator
 # category:            Web
 
 # To avoid duplicated efforts in documentation and dealing with the
@@ -19,8 +19,26 @@ extra-source-files:
 # common to point users to the README.md file.
 description:         Please see the README on GitHub at <https://github.com/githubuser/bookreator#readme>
 
+ghc-options:
+  - -Wall
+  - -Wcompat
+  - -Wincomplete-uni-patterns
+  - -Wincomplete-record-updates
+  - -Wmissing-home-modules
+  - -Widentities
+  - -Wredundant-constraints
+  # Parallel by default
+  - -j
+  # Don't optimize by default (faster build time)
+  - -O0
+
 dependencies:
-- base >= 4.7 && < 5
+  - base >= 4.7 && < 5
+  - hasbolt
+  - bytestring
+  - servant
+  - servant-server
+  - resource-pool
 
 library:
   source-dirs: src
