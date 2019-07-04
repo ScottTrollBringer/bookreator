@@ -35,10 +35,15 @@ ghc-options:
 dependencies:
   - base >= 4.7 && < 5
   - hasbolt
-  - bytestring
-  - servant
-  - servant-server
+  - scotty
+  - wai-extra
   - resource-pool
+  - transformers
+  - mtl
+  - text
+  - aeson
+  - containers
+  - data-default
 
 library:
   source-dirs: src
