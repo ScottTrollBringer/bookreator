@@ -4,12 +4,12 @@ module ApiServer
     ( runServer
     ) where
 
-import           Control.Monad.Trans.Reader           (runReaderT)
-import           Network.Wai.Middleware.RequestLogger (logStdoutDev)
-import           Web.Scotty.Trans                     (get, middleware, scottyT)
-import           Database.Bolt                        (BoltCfg)
-import           Routes
-import           Data
+import Control.Monad.Trans.Reader           (runReaderT)
+import Network.Wai.Middleware.RequestLogger (logStdoutDev)
+import Web.Scotty.Trans                     (get, middleware, scottyT)
+import Database.Bolt                        (BoltCfg)
+import Routes
+import Data
 
 type Port = Int
 

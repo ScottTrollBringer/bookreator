@@ -11,8 +11,8 @@ import Control.Monad.Trans.Reader (ReaderT (..))
 import Data.Pool                  (Pool, createPool)
 import Database.Bolt
 import Type
-import Data.Text hiding (head)
-import Data.Map.Strict (fromList)
+import Data.Text hiding           (head)
+import Data.Map.Strict            (fromList)
 
 -- |A pool of connections to Neo4j server
 newtype ServerState = ServerState { pool :: Pool Pipe }
