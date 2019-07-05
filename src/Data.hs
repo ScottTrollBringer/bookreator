@@ -7,10 +7,10 @@ module Data
     , queryPage
     ) where
 
-import           Control.Monad.Trans.Reader (ReaderT (..))
-import           Data.Pool                  (Pool, createPool)
-import           Database.Bolt
-import           Type
+import Control.Monad.Trans.Reader (ReaderT (..))
+import Data.Pool                  (Pool, createPool)
+import Database.Bolt
+import Type
 
 -- |A pool of connections to Neo4j server
 newtype ServerState = ServerState { pool :: Pool Pipe }

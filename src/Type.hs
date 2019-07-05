@@ -3,9 +3,9 @@
 
 module Type where
 
-import           Data.Aeson (ToJSON (..), object, (.=))
-import           Data.Text    (Text)
-import Database.Bolt (Value (..), RecordValue (..), Node (..), at)
+import Data.Aeson     (ToJSON (..), object, (.=))
+import Data.Text      (Text)
+import Database.Bolt  (Value (..), RecordValue (..), Node (..), at)
 
 data Page = Page { title  :: Text
                  , numero :: Text
