@@ -11,6 +11,8 @@ import Control.Monad.Trans.Reader (ReaderT (..))
 import Data.Pool                  (Pool, createPool)
 import Database.Bolt
 import Type
+import Data.Text hiding (head)
+import Data.Map.Strict (fromList)
 
 -- |A pool of connections to Neo4j server
 newtype ServerState = ServerState { pool :: Pool Pipe }
@@ -19,14 +21,15 @@ newtype ServerState = ServerState { pool :: Pool Pipe }
 type WebM = ReaderT ServerState IO
 
 -- |Returns a single Page
-queryPage :: BoltActionT IO Page
-queryPage = do
-                result <- head <$> query cypher
+queryPage :: Text -> BoltActionT IO Page
+queryPage num = do
+                result <- head <$> queryP cypher params
                 T title <- result `at` "title"
                 T numero <- result `at` "numero"
                 return $ Page title numero
-            where cypher =  "MATCH (page:Page {title:'Intro'})" <>
+            where cypher =  "MATCH (page:Page {numero:{num}})" <>
                             "RETURN page.title as title, page.numero as numero LIMIT 1"
+                  params = fromList [("num", T num)]
 
 
 -- |Create pool of connections (4 stripes, 500 ms timeout, 1 resource per stripe)
