@@ -18,4 +18,5 @@ runServer port config = do state <- constructState config
                            scottyT port (`runReaderT` state) $ do
                              middleware logStdoutDev
                              get  "/"             mainRoute
+                             get  "/js"           jsRoute
                              get  "/page"         pageRoute

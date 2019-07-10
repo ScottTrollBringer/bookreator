@@ -1,55 +1,16 @@
-module Main exposing (Model, Msg(..), init, main, update, view)
+module Main exposing (main, view)
 
 import Browser
-import Html exposing (Html, button, div, text)
-import Html.Events exposing (onClick)
-import Html.Attributes exposing (id)
-
+import State
+import Html exposing (Html, div, text)
+import Types exposing (..)
 
 main =
-    Browser.sandbox { init = init, update = update, view = view }
-
-
-
--- MODEL
-
-
-type alias Model =
-    Int
-
-
-init : Int
-init =
-    0
-
-
-
--- UPDATE
-
-
-type Msg
-    = Increment
-    | Decrement
-
-
-update : Msg -> Model -> Model
-update msg model =
-    case msg of
-        Increment ->
-            model + 1
-
-        Decrement ->
-            model - 1
-
-
-
--- VIEW
+    Browser.element { init = State.init, update = State.update, subscriptions = State.subscriptions, view = view }
 
 
 view : Model -> Html Msg
 view model =
     div []
-        [ button [ id "boutonM", onClick Decrement ] [ text "-" ]
-        , div [ id "compteur" ] [ text (String.fromInt model) ]
-        , button [ id "boutonP", onClick Increment ] [ text "+" ]
+        [ text "Trololol"
         ]

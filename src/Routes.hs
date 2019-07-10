@@ -18,6 +18,9 @@ runQ act = do ss <- lift ask
 mainRoute :: ActionT Text WebM ()
 mainRoute = file "views/index.html"
 
+jsRoute :: ActionT Text WebM ()
+jsRoute = file "views/main.js"
+
 pageRoute :: ActionT Text WebM ()
 pageRoute = do num <- param "numero" :: ActionT Text WebM Text
                results <- runQ $ queryPage $ toStrict num
