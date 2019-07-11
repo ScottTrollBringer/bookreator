@@ -10,9 +10,9 @@ init _ =
 
 initialModel : Model
 initialModel =
-    { bookTitle = { title = "" }
-    , content = ""
-    , displayedPage = "1"
+    { book = { title = "Loading..." }
+    , content = "Work in progress"
+    , displayedPage = "Work in progress"
     , numeroActualPage = ""
     , numeroChildPages = []
     , loading = False
@@ -40,7 +40,7 @@ update msg model =
         GetBook result ->
             case result of
                 Ok printTitle ->
-                    ( { model | bookTitle = printTitle, loading = False }, Cmd.none )
+                    ( { model | book = printTitle, loading = False }, Cmd.none )
 
                 Err _ ->
                     nothingToShow model

@@ -14,7 +14,7 @@ view : Model -> Html Msg
 view model =
     table [ align "center" ]
         [ tr []
-          [ td [] [ h1 [] [ text model.bookTitle.title ] ]
+          [ td [] [ h1 [] [ text model.book.title ] ]
           ]
         , tr []
           [ td [] [ h2 [ align "center" ] [ text ("Page : " ++ model.displayedPage) ] ]

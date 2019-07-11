@@ -10,7 +10,7 @@ type Msg
 
 
 type alias Model =
-    { bookTitle : Book
+    { book : Book
     , content : String
     , displayedPage : String
     , numeroActualPage : String
