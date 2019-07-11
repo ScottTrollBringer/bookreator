@@ -16,3 +16,12 @@ type alias Model =
     , loading : Bool
     , resultToShow : String
     }
+
+type alias Book =
+    { title : String
+    }
+
+type alias Page =
+    { content : String
+    , numero : String
+    }
