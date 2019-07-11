@@ -1,15 +1,17 @@
 module State exposing (init, subscriptions, update)
 
 import Types exposing (..)
+import Rest exposing (..)
 
 init : () -> ( Model, Cmd Msg )
 init _ =
-    ( initialModel, Cmd.none )
+    ( initialModel, getBook GetBook bookDecoder )
 
 
 initialModel : Model
 initialModel =
-    { bookTitle = ""
+    { bookTitle = { title = "" }
+    , content = ""
     , displayedPage = "1"
     , numeroActualPage = ""
     , numeroChildPages = []
@@ -24,13 +26,21 @@ update msg model =
         PrintPage ->
             ( { model | displayedPage = "1" }, Cmd.none )
 
-        ChangeToNextPage newCountry ->
-            ( { model | displayedPage = newCountry }, Cmd.none )
+        ChangeToNextPage newPage ->
+            ( { model | displayedPage = newPage }, Cmd.none )
 
         GetNextPage result ->
             case result of
                 Ok nextPage ->
                     ( { model | displayedPage = nextPage, loading = False, resultToShow = "page" }, Cmd.none )
+
+                Err _ ->
+                    nothingToShow model
+
+        GetBook result ->
+            case result of
+                Ok printTitle ->
+                    ( { model | bookTitle = printTitle, loading = False }, Cmd.none )
 
                 Err _ ->
                     nothingToShow model

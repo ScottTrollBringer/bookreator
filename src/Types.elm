@@ -1,4 +1,4 @@
-module Types exposing (Model, Msg(..))
+module Types exposing (Model, Msg(..), Book, Page)
 
 import Http
 
@@ -6,10 +6,12 @@ type Msg
     = PrintPage
     | GetNextPage (Result Http.Error String)
     | ChangeToNextPage String
+    | GetBook (Result Http.Error Book)
 
 
 type alias Model =
-    { bookTitle : String
+    { bookTitle : Book
+    , content : String
     , displayedPage : String
     , numeroActualPage : String
     , numeroChildPages : List String
