@@ -20,3 +20,4 @@ runServer port config = do state <- constructState config
                              get  "/"             mainRoute
                              get  "/js"           jsRoute
                              get  "/page"         pageRoute
+                             get  "/book"         bookRoute

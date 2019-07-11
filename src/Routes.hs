@@ -25,3 +25,7 @@ pageRoute :: ActionT Text WebM ()
 pageRoute = do num <- param "numero" :: ActionT Text WebM Text
                results <- runQ $ queryPage $ toStrict num
                json results
+
+bookRoute :: ActionT Text WebM ()
+bookRoute = do results <- runQ $ queryBook
+               json results

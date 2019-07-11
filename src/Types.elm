@@ -9,7 +9,10 @@ type Msg
 
 
 type alias Model =
-    { displayedPage : String
+    { bookTitle : String
+    , displayedPage : String
+    , numeroActualPage : String
+    , numeroChildPages : List String
     , loading : Bool
     , resultToShow : String
     }

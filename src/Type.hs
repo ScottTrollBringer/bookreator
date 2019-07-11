@@ -7,12 +7,18 @@ import Data.Aeson     (ToJSON (..), object, (.=))
 import Data.Text      (Text)
 import Database.Bolt  (Value (..), RecordValue (..), Node (..), at)
 
-data Page = Page { title  :: Text
+data Page = Page { content  :: Text
                  , numero :: Text
                  } deriving (Show, Eq)
 
 instance ToJSON Page where
-  toJSON (Page t n) = object [ "title" .= t, "numero" .= n ]
+  toJSON (Page c n) = object [ "content" .= c, "numero" .= n ]
+
+newtype Book = Book { title  :: Text
+                 } deriving (Show, Eq)
+
+instance ToJSON Book where
+  toJSON (Book t) = object [ "title" .= t ]
 
 -- |Converts some BOLT value to 'Page'
 toPage :: Monad m => Value -> m Page

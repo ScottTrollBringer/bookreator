@@ -5,6 +5,7 @@ module Data
     , WebM
     , constructState
     , queryPage
+    , queryBook
     ) where
 
 import Control.Monad.Trans.Reader (ReaderT (..))
@@ -24,12 +25,22 @@ type WebM = ReaderT ServerState IO
 queryPage :: Text -> BoltActionT IO Page
 queryPage num = do
                 result <- head <$> queryP cypher params
-                T title <- result `at` "title"
+                T content <- result `at` "content"
                 T numero <- result `at` "numero"
-                return $ Page title numero
+                return $ Page content numero
             where cypher =  "MATCH (page:Page {numero:{num}})" <>
-                            "RETURN page.title as title, page.numero as numero LIMIT 1"
+                            "RETURN page.content as content, page.numero as numero LIMIT 1"
                   params = fromList [("num", T num)]
+
+
+-- |Returns a single Page
+queryBook :: BoltActionT IO Book
+queryBook = do
+                result <- head <$> query cypher
+                T title <- result `at` "title"
+                return $ Book title
+            where cypher =  "MATCH (book:Book)" <>
+                            "RETURN book.title as title LIMIT 1"
 
 
 -- |Create pool of connections (4 stripes, 500 ms timeout, 1 resource per stripe)

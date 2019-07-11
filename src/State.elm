@@ -9,7 +9,10 @@ init _ =
 
 initialModel : Model
 initialModel =
-    { displayedPage = "10"
+    { bookTitle = ""
+    , displayedPage = "1"
+    , numeroActualPage = ""
+    , numeroChildPages = []
     , loading = False
     , resultToShow = ""
     }
