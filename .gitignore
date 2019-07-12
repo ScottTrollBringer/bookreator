@@ -1,4 +1,4 @@
-elm-stuff
+# Local scripts to initialize environment variables and data in Neo4J
 Initialization.bat
 RequestsCypher.txt
 
