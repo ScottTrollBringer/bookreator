@@ -1,4 +1,4 @@
-module Rest exposing (..)
+module Rest exposing (getBook, getPageByNumero, bookDecoder, pageDecoder)
 
 import Http
 import Types exposing (Book, Page)
