@@ -5,12 +5,22 @@ import Rest exposing (..)
 
 init : () -> ( Model, Cmd Msg )
 init _ =
-    ( initialModel, getBook GetBook bookDecoder )
+    ( initialModel, Cmd.batch [ initPage, initBook ] )
+
+initPage : Cmd Msg
+initPage =
+    getPageByNumero "1" GetPage pageDecoder
+
+
+initBook : Cmd Msg
+initBook =
+    getBook GetBook bookDecoder
 
 
 initialModel : Model
 initialModel =
     { book = { title = "Loading..." }
+    , page = { numero = "1", content = "" }
     , content = "Work in progress"
     , displayedPage = "Work in progress"
     , numeroActualPage = ""
@@ -29,10 +39,10 @@ update msg model =
         ChangeToNextPage newPage ->
             ( { model | displayedPage = newPage }, Cmd.none )
 
-        GetNextPage result ->
+        GetPage result ->
             case result of
                 Ok nextPage ->
-                    ( { model | displayedPage = nextPage, loading = False, resultToShow = "page" }, Cmd.none )
+                    ( { model | page = nextPage, loading = False }, Cmd.none )
 
                 Err _ ->
                     nothingToShow model
