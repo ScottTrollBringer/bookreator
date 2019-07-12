@@ -4,13 +4,14 @@ import Http
 
 type Msg
     = PrintPage
-    | GetNextPage (Result Http.Error String)
+    | GetPage (Result Http.Error Page)
     | ChangeToNextPage String
     | GetBook (Result Http.Error Book)
 
 
 type alias Model =
     { book : Book
+    , page : Page
     , content : String
     , displayedPage : String
     , numeroActualPage : String

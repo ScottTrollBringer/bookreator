@@ -15,6 +15,14 @@ createUrlPage urlInput numPage =
         ]
 
 
+getPageByNumero : String -> (Result Http.Error a -> Msg) -> Decoder a -> Cmd Msg
+getPageByNumero numero message decoder =
+    Http.get
+        { url = createUrlPage "/page" numero
+        , expect = Http.expectJson message decoder
+        }
+
+
 getBook : (Result Http.Error a -> Msg) -> Decoder a -> Cmd Msg
 getBook message decoder =
     Http.get
