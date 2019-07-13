@@ -1,61 +1,43 @@
 module FuzzTests exposing (..)
 
 import Expect exposing (Expectation)
+import Fuzz exposing (..)
 import Test exposing (..)
 import Rest exposing (..)
-import Json.Decode exposing (Decoder)
-
-decodesBook : Test
-decodesBook =
-    test "Properly decodes a Book node" <|
-        \() ->
-            let
-                input =
-                    """
-                      { "title" : "MyBalls"
-                      }
-                    """
-                decodedOutput =
-                    Json.Decode.decodeString
-                        bookDecoder input
-            in
-                Expect.equal decodedOutput
-                    (Ok
-                        { title = "MyBalls"
-                        }
-                    )
+import Json.Decode exposing (Decoder, decodeValue)
+import Json.Encode as Json
 
 
 decodesPage : Test
 decodesPage =
-    test "Properly decodes a Page node" <|
-        \() ->
-            let
-                input =
-                    """
-                      { "numero" : "42"
-                      , "content" : "Nice stuff."
-                      }
-                    """
-                decodedOutput =
-                    Json.Decode.decodeString
-                        pageDecoder input
-            in
-                Expect.equal decodedOutput
-                    (Ok
-                        { numero = "42"
-                        , content = "Nice stuff."
-                        }
-                    )
+    describe "Decode Page"
+        [ fuzz2 Fuzz.string Fuzz.string "Properly decodes a Page node" <|
+            \content numero ->
+                let
+                    json =
+                        Json.object
+                            [ ( "content", Json.string content )
+                            , ( "numero", Json.string numero )
+                            ]
+                in
+                decodeValue pageDecoder json
+                    |> Expect.equal
+                        (Ok { content = content, numero = numero })
+        ]
 
 
-buildUrlWithQueryString : Test
-buildUrlWithQueryString =
-    test "Properly creates an URL with 1 argument in QueryString" <|
-        \() ->
-            let
-                url = "/page"
-                numPage = "1"
-                createURL = createUrlPage url numPage
-            in
-                Expect.equal createURL ("/page/?numero=1")
+decodesBook : Test
+decodesBook =
+    describe "Decode Book"
+        [ fuzz Fuzz.string "Properly decodes a Book node" <|
+            \title ->
+                let
+                    json =
+                        Json.object
+                            [ ( "title", Json.string title )
+                            ]
+                in
+                decodeValue bookDecoder json
+                    |> Expect.equal
+                        (Ok { title = title })
+        ]
