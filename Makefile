@@ -5,5 +5,6 @@ build:
 	@stack build
 	@echo "Building main.js from Elm files"
 	@elm make ./src/Main.elm --output=./views/main.js
+	@stack test
 	@elm-test
 	@testcafe chrome tests\testsUI.js
