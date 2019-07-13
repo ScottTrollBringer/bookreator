@@ -4,6 +4,7 @@ import Browser
 import State
 import Html exposing (Html, table, text, tr, td, button, textarea, h1, h2)
 import Html.Attributes exposing (disabled, cols, rows, align)
+import Html.Events exposing (onClick)
 import Types exposing (..)
 
 main =
@@ -23,8 +24,9 @@ view model =
           [ td [] [ textarea [ disabled True, cols 80, rows 30 ] [ text model.page.content ] ]
           ]
         , tr []
-          [ td [ align "center" ] [ button [] [ text "Choix 1" ]
-                  , button [] [ text "Choix 2" ]
+          [ td [ align "center" ]
+                  [ button [ onClick (PrintPage "2") ] [ text "Choix 1" ]
+                  , button [ onClick (PrintPage "3") ] [ text "Choix 2" ]
                   ]
           ]
         ]

@@ -43,6 +43,9 @@ update msg model =
                 Err _ ->
                     nothingToShow model
 
+        PrintPage numero ->
+            ( model, getPageByNumero numero GetPage pageDecoder )
+
 
 nothingToShow : Model -> ( Model, Cmd Msg )
 nothingToShow model =
