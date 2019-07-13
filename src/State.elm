@@ -20,7 +20,7 @@ initBook =
 initialModel : Model
 initialModel =
     { book = { title = "Loading..." }
-    , page = { numero = "1", content = "" }
+    , page = { numero = "Loading...", content = "Loading..." }
     }
 
 

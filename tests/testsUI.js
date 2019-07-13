@@ -1,13 +1,13 @@
 import { Selector } from 'testcafe';
 
-fixture `Testing my test page`
-  .page `http://localhost:5000`;
+fixture `Testing the home page`
+  .page `http://localhost:8080`;
 
-test('Testing initial state then decrement then increment', async t => {
+test('Testing that all initial components are loading correctly initial state', async t => {
   await t
-    .expect(Selector('#compteur').innerText).eql('0')
-    .click('#boutonM')
-    .expect(Selector('#compteur').innerText).eql('-1')
-    .click('#boutonP')
-    .expect(Selector('#compteur').innerText).eql('0');
+    .expect(Selector('#bookTitle').exists).ok()
+    .expect(Selector('#pageNumber').exists).ok()
+    .expect(Selector('#pageContent').exists).ok()
+    .expect(Selector('#button1').exists).ok()
+    .expect(Selector('#button2').exists).ok()
   });
