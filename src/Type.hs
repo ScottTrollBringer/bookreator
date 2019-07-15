@@ -5,10 +5,10 @@ module Type where
 
 import Data.Aeson     (ToJSON (..), object, (.=))
 import Data.Text      (Text)
-import Database.Bolt  (Value (..), RecordValue (..), Node (..), at)
+--import Database.Bolt  (Value (..), RecordValue (..), Node (..), at)
 
 data Page = Page { content  :: Text
-                 , numero :: Text
+                 , numero :: Int
                  } deriving (Show, Eq)
 
 instance ToJSON Page where

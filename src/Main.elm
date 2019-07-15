@@ -18,7 +18,7 @@ view model =
           [ td [] [ h1 [ id "bookTitle" ] [ text model.book.title ] ]
           ]
         , tr []
-          [ td [] [ h2 [ align "center", id "pageNumber" ] [ text ("Page : " ++ model.page.numero) ] ]
+          [ td [] [ h2 [ align "center", id "pageNumber" ] [ text ("Page : " ++ (String.fromInt model.page.numero)) ] ]
           ]
         , tr []
           [ td [] [ textarea [ disabled True, cols 80, rows 30, id "pageContent" ] [ text model.page.content ] ]

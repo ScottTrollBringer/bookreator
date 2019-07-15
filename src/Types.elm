@@ -19,5 +19,5 @@ type alias Book =
 
 type alias Page =
     { content : String
-    , numero : String
+    , numero : Int
     }

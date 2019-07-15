@@ -1,4 +1,4 @@
-module Rest exposing (getBook, getPageByNumero, bookDecoder, pageDecoder, createUrlPage)
+module Rest exposing (getBook, getPageByNumero, bookDecoder, pageDecoder, createUrlPage, getFirstPage)
 
 import Http
 import Types exposing (Book, Page)
@@ -23,6 +23,14 @@ getPageByNumero numero message decoder =
         }
 
 
+getFirstPage : (Result Http.Error a -> Msg) -> Decoder a -> Cmd Msg
+getFirstPage message decoder =
+    Http.get
+        { url = "/page/first"
+        , expect = Http.expectJson message decoder
+        }
+
+
 getBook : (Result Http.Error a -> Msg) -> Decoder a -> Cmd Msg
 getBook message decoder =
     Http.get
@@ -41,4 +49,4 @@ pageDecoder : Decoder Page
 pageDecoder =
     map2 Page
         (field "content" Json.Decode.string)
-        (field "numero" Json.Decode.string)
+        (field "numero" Json.Decode.int)
