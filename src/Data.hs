@@ -13,7 +13,7 @@ import Control.Monad.Trans.Reader (ReaderT (..))
 import Data.Pool                  (Pool, createPool)
 import Database.Bolt
 import Type
-import Data.Text hiding           (head)
+import Data.Text as T hiding      (head)
 import Data.Map.Strict            (fromList)
 
 -- |A pool of connections to Neo4j server
@@ -40,10 +40,11 @@ queryFirstPage = do
                 result <- head <$> query cypher
                 T content <- result `at` "content"
                 I numero <- result `at` "numero"
-                return $ Page content numero
-            where cypher =  "MATCH (page:Page {numero:1})" <>
-                            "RETURN page.content as content, page.numero as numero LIMIT 1"
-
+                L choice <- result `at` "reasons"
+                reasons <- traverse toChoice choice
+                return $ Page content numero reasons
+            where cypher =  "MATCH (page:Page {numero:1})<-[r:CHILD_OF]-(Page)" <>
+                            "RETURN page.content as content, page.numero as numero, collect([r.choice]) as reasons LIMIT 1"
 
 -- |Returns a single Page
 queryBook :: BoltActionT IO Book
