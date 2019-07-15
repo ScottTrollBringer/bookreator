@@ -21,10 +21,10 @@ instance ToJSON Book where
   toJSON (Book t) = object [ "title" .= t ]
 
 -- |Converts some BOLT value to 'Page'
-toPage :: Monad m => Value -> m Page
-toPage v = do
-               node :: Node <- exact v
-               let props = nodeProps node
-               title :: Text <- (props `at` "title") >>= exact
-               numero :: Text <- (props `at` "numero") >>= exact
-               return $ Page title numero
+--toPage :: Monad m => Value -> m Page
+--toPage v = do
+--               node :: Node <- exact v
+--               let props = nodeProps node
+--               title :: Text <- (props `at` "title") >>= exact
+--               numero :: Text <- (props `at` "numero") >>= exact
+--               return $ Page title numero
