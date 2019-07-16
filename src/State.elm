@@ -20,7 +20,7 @@ initBook =
 initialModel : Model
 initialModel =
     { book = { title = "Loading..." }
-    , page = { numero = 0, content = "Loading..." }
+    , page = { numero = 0, content = "Loading...", choices = [] }
     }
 
 

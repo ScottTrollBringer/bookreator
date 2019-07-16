@@ -1,8 +1,8 @@
 module Rest exposing (getBook, getPageByNumero, bookDecoder, pageDecoder, createUrlPage, getFirstPage)
 
 import Http
-import Types exposing (Book, Page)
-import Json.Decode exposing (Decoder, map, map2, field)
+import Types exposing (Book, Page, Choice)
+import Json.Decode exposing (Decoder, map, map3, field, list)
 import Url.Builder
 import Types exposing (Msg(..))
 
@@ -47,6 +47,15 @@ bookDecoder =
 
 pageDecoder : Decoder Page
 pageDecoder =
-    map2 Page
+    map3 Page
         (field "content" Json.Decode.string)
         (field "numero" Json.Decode.int)
+        (field "choices" <| Json.Decode.list choiceDecoder)
+
+
+choiceDecoder : Decoder Choice
+choiceDecoder =
+    map Choice
+      (field "reason" Json.Decode.string)
+
+

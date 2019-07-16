@@ -1,4 +1,4 @@
-module Types exposing (Model, Msg(..), Book, Page)
+module Types exposing (Model, Msg(..), Book, Page, Choice)
 
 import Http
 
@@ -20,4 +20,9 @@ type alias Book =
 type alias Page =
     { content : String
     , numero : Int
+    , choices : List Choice
+    }
+
+type alias Choice =
+    { reason : String
     }

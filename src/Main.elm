@@ -23,14 +23,23 @@ view model =
         , tr []
           [ td [] [ textarea [ disabled True, cols 80, rows 30, id "pageContent" ] [ text model.page.content ] ]
           ]
-        , tr []
-          [ td [ align "left" ]
-                  [ button [ onClick (PrintPage "2"), id "button1" ] [ text "Choix 1" ]
-                  ]
-          ]
-        , tr []
-          [ td [ align "left" ]
-                  [ button [ onClick (PrintPage "3"), id "button2" ] [ text "Choix 2" ]
-                  ]
-          ]
+        , printButtons model
         ]
+
+
+printButtons : Model -> Html Msg
+printButtons model =
+  table []
+    ([ tr [] [] ]
+      ++ List.map renderButtons model.page.choices
+    )
+
+
+renderButtons : Choice -> Html Msg
+renderButtons choice =
+  tr []
+    [
+     td [ align "left" ]
+              [ button [ onClick (PrintPage "2"), id "button1" ] [ text choice.reason ]
+              ]
+    ]
