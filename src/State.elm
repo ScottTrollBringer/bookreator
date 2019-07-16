@@ -9,7 +9,7 @@ init _ =
 
 initPage : Cmd Msg
 initPage =
-    getPageByNumero "1" GetPage pageDecoder
+    getFirstPage GetPage pageDecoder
 
 
 initBook : Cmd Msg
@@ -20,7 +20,7 @@ initBook =
 initialModel : Model
 initialModel =
     { book = { title = "Loading..." }
-    , page = { numero = "Loading...", content = "Loading..." }
+    , page = { numero = 0, content = "Loading...", choices = [] }
     }
 
 
