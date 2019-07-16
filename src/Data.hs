@@ -31,8 +31,8 @@ queryPage reason = do
                 L choice <- result `at` "reasons"
                 reasons <- traverse toChoice choice
                 return $ Page content numero reasons
-            where cypher =  "MATCH (page:Page)-[r:CHILD_OF {choice:{reason}]->(Page)" <>
-                            "RETURN page.content as content, page.numero as numero, collect([r.choice]) as reasons LIMIT 1"
+            where cypher =  "MATCH (pageFille:Page)-[r2:CHILD_OF]->(pageToDisplay:Page)-[r:CHILD_OF {choice:{reason}}]->(pagePere:Page)" <>
+                            "RETURN pageToDisplay.content as content, pageToDisplay.numero as numero, collect([r2.choice]) as reasons LIMIT 1"
                   params = fromList [("reason", T reason)]
 
 
