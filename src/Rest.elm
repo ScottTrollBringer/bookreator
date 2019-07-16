@@ -11,7 +11,7 @@ createUrlPage : String -> String -> String
 createUrlPage urlInput numPage =
     Url.Builder.crossOrigin urlInput
         []
-        [ Url.Builder.string "numero" numPage
+        [ Url.Builder.string "reason" numPage
         ]
 
 

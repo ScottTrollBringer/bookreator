@@ -35,6 +35,6 @@ renderButtons choice =
   tr []
     [
      td [ align "left" ]
-       [ button [ onClick (PrintPage "2") ] [ text choice.reason ]
+       [ button [ onClick (PrintPage choice.reason) ] [ text choice.reason ]
        ]
     ]
