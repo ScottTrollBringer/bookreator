@@ -4,7 +4,7 @@ module Data
     ( ServerState (..)
     , WebM
     , constructState
---    , queryPage
+    , queryPage
     , queryFirstPage
     , queryBook
     ) where
@@ -23,15 +23,17 @@ newtype ServerState = ServerState { pool :: Pool Pipe }
 type WebM = ReaderT ServerState IO
 
 -- |Returns a single Page
---queryPage :: Text -> BoltActionT IO Page
---queryPage num = do
---                result <- head <$> queryP cypher params
---                T content <- result `at` "content"
---                T numero <- result `at` "numero"
---                return $ Page content numero
---            where cypher =  "MATCH (page:Page {numero:{num}})" <>
---                            "RETURN page.content as content, page.numero as numero LIMIT 1"
---                  params = fromList [("num", T num)]
+queryPage :: Text -> BoltActionT IO Page
+queryPage reason = do
+                result <- head <$> query cypher
+                T content <- result `at` "content"
+                I numero <- result `at` "numero"
+                L choice <- result `at` "reasons"
+                reasons <- traverse toChoice choice
+                return $ Page content numero reasons
+            where cypher =  "MATCH (page:Page)-[r:CHILD_OF {choice:{reason}]->(Page)" <>
+                            "RETURN page.content as content, page.numero as numero, collect([r.choice]) as reasons LIMIT 1"
+                  params = fromList [("reason", T reason)]
 
 
 -- |Returns the first Page
@@ -45,6 +47,7 @@ queryFirstPage = do
                 return $ Page content numero reasons
             where cypher =  "MATCH (page:Page {numero:1})<-[r:CHILD_OF]-(Page)" <>
                             "RETURN page.content as content, page.numero as numero, collect([r.choice]) as reasons LIMIT 1"
+
 
 -- |Returns a single Page
 queryBook :: BoltActionT IO Book
