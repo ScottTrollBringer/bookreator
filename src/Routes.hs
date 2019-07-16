@@ -28,10 +28,10 @@ cssRoute :: ActionT Text WebM ()
 cssRoute = file "views/style.css"
 
 -- Print the page content
---pageRoute :: ActionT Text WebM ()
---pageRoute = do num <- param "numero" :: ActionT Text WebM Text
---               results <- runQ $ queryPage $ toStrict num
---               json results
+pageRoute :: ActionT Text WebM ()
+pageRoute = do num <- param "reason" :: ActionT Text WebM Text
+               results <- runQ $ queryPage $ toStrict num
+               json results
 
 -- Print the first page content
 firstPageRoute :: ActionT Text WebM ()

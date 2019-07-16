@@ -25,7 +25,7 @@ type WebM = ReaderT ServerState IO
 -- |Returns a single Page
 queryPage :: Text -> BoltActionT IO Page
 queryPage reason = do
-                result <- head <$> query cypher
+                result <- head <$> queryP cypher params
                 T content <- result `at` "content"
                 I numero <- result `at` "numero"
                 L choice <- result `at` "reasons"
