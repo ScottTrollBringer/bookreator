@@ -10,19 +10,49 @@ import Json.Encode as Json
 
 decodesPage : Test
 decodesPage =
-    describe "Decode Page"
-        [ fuzz2 Fuzz.string Fuzz.string "Properly decodes a Page node" <|
-            \content numero ->
+        test "Properly decodes a Page node" <|
+            \() ->
+                let
+                  json =
+                    """
+                      {
+                        "content": "Intro",
+                        "choices": [
+                          {
+                            "reason": "Choice 1."
+                          },
+                          {
+                            "reason": "Choice 2."
+                          }
+                        ],
+                        "numero": 1
+                      }
+                    """
+                  output = Json.Decode.decodeString pageDecoder json
+                in
+                  Expect.equal output
+                      (Ok
+                          { content = "Intro"
+                          , choices = [{reason = "Choice 1."},{reason = "Choice 2."}]
+                          , numero = 1
+                          }
+                      )
+
+
+decodesChoice : Test
+decodesChoice =
+    describe "Decode Choice"
+        [ fuzz Fuzz.string "Properly decodes a Choice node" <|
+            \reason ->
                 let
                     json =
                         Json.object
-                            [ ( "content", Json.string content )
-                            , ( "numero", Json.string numero )
+                            [ ( "reason", Json.string reason )
                             ]
                 in
-                decodeValue pageDecoder json
+                decodeValue choiceDecoder json
                     |> Expect.equal
-                        (Ok { content = content, numero = numero })
+                        (Ok { reason = reason })
         ]
 
 

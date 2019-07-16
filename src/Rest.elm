@@ -1,4 +1,4 @@
-module Rest exposing (getBook, getPageByNumero, bookDecoder, pageDecoder, createUrlPage, getFirstPage)
+module Rest exposing (getBook, getPageByNumero, bookDecoder, pageDecoder, createUrlPage, getFirstPage, choiceDecoder)
 
 import Http
 import Types exposing (Book, Page, Choice)
@@ -57,5 +57,4 @@ choiceDecoder : Decoder Choice
 choiceDecoder =
     map Choice
       (field "reason" Json.Decode.string)
-
 
