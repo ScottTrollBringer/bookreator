@@ -23,7 +23,7 @@ mainRoute = file "views/index.html"
 jsRoute :: ActionT Text WebM ()
 jsRoute = file "views/main.js"
 
--- Mandatory to display Elm code inside the home page
+-- Mandatory to take CSS into account
 cssRoute :: ActionT Text WebM ()
 cssRoute = file "views/style.css"
 
