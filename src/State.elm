@@ -29,8 +29,8 @@ update msg model =
     case msg of
         GetPage result ->
             case result of
-                Ok nextPage ->
-                    ( { model | page = nextPage }, Cmd.none )
+                Ok printPage ->
+                    ( { model | page = printPage }, Cmd.none )
 
                 Err _ ->
                     nothingToShow model

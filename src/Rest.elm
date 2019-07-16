@@ -2,7 +2,7 @@ module Rest exposing (getBook, getPageByNumero, bookDecoder, pageDecoder, create
 
 import Http
 import Types exposing (Book, Page, Choice)
-import Json.Decode exposing (Decoder, map, map3, field, list)
+import Json.Decode exposing (Decoder, map, map3, field)
 import Url.Builder
 import Types exposing (Msg(..))
 
