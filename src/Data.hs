@@ -33,7 +33,7 @@ queryPage reason = do
                 return $ Page content numero reasons
             where cypher =  "MATCH (pageToDisplay:Page)-[r:CHILD_OF {choice:{reason}}]->(pagePere:Page)" <>
                             "OPTIONAL MATCH (pageFille:Page)-[r2:CHILD_OF]->(pageToDisplay:Page)" <>
-                            "RETURN pageToDisplay.content as content, pageToDisplay.numero as numero, collect([r2.choice]) as reasons LIMIT 1"
+                            "RETURN pageToDisplay.content as content, pageToDisplay.numero as numero, coalesce(CASE WHEN r2 IS NOT NULL THEN collect([r2.choice]) ELSE NULL END, []) AS reasons LIMIT 1"
                   params = fromList [("reason", T reason)]
 
 
