@@ -19,9 +19,16 @@ runQ act = do ss <- lift ask
 mainRoute :: ActionT Text WebM ()
 mainRoute = file "views/index.html"
 
+adminRoute :: ActionT Text WebM ()
+adminRoute = file "views/admin.html"
+
 -- Mandatory to display Elm code inside the home page
 jsRoute :: ActionT Text WebM ()
 jsRoute = file "views/main.js"
+
+-- Mandatory to display Elm code inside the home page
+adminJsRoute :: ActionT Text WebM ()
+adminJsRoute = file "views/admin.js"
 
 -- Mandatory to take CSS into account
 cssRoute :: ActionT Text WebM ()
@@ -35,10 +42,10 @@ pageRoute = do num <- param "reason" :: ActionT Text WebM Text
 
 -- Print the first page content
 firstPageRoute :: ActionT Text WebM ()
-firstPageRoute = do results <- runQ $ queryFirstPage
+firstPageRoute = do results <- runQ queryFirstPage
                     json results
 
 -- Print the book title
 bookRoute :: ActionT Text WebM ()
-bookRoute = do results <- runQ $ queryBook
+bookRoute = do results <- runQ queryBook
                json results

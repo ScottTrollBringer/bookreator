@@ -19,6 +19,8 @@ runServer port config = do state <- constructState config
                              middleware logStdoutDev
                              get  "/"             mainRoute
                              get  "/js"           jsRoute
+                             get  "/admin"        adminRoute
+                             get  "/adminjs"      adminJsRoute
                              get  "/css"          cssRoute
                              get  "/page"         pageRoute
                              get  "/page/first"   firstPageRoute

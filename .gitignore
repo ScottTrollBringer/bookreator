@@ -264,3 +264,4 @@ elmapp.config.js
 
 # Specific to my code
 views/main.js
+views/admin.js
