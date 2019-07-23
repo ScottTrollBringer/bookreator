@@ -5,10 +5,9 @@ To have it works properly you need:
 - Elm 0.19
 - Neo4j 3.5.6+
 
-V0.1 specifics: you need to create a database with 2 kind of nodes:
-- Book, with only 1 field "title"
-- Page, with 2 fields "content" and "numero"
-- In V0.5 these actions will not be needed anymore as there will be an administration page to create those nodes.
+At the moment you need to create a database with some nodes, you can find sample queries that will build a basic structure with some data in `RequestsCypher.txt` at the root of this repository.
+
+In V0.5 these actions will not be needed anymore as there will be an administration page to create those nodes.
 
 You need to set 3 environment variables:
 - GRAPHENEDB_BOLT_PASSWORD: the password of your Neo4j database
@@ -17,3 +16,7 @@ You need to set 3 environment variables:
 
 To run tests you need:
 - Test Cafe: `npm install -g testcafe`
+
+You can access 2 URLs:
+- Reading part: http://localhost:8080
+- Administration: http://localhost:8080/admin
