@@ -1,7 +1,7 @@
 module Admin exposing (..)
 
 import Browser
-import Html exposing (Html, table, text, tr, td, button, textarea, input, h1)
+import Html exposing (Html, table, text, tr, td, button, textarea, input, h1, hr, select)
 import Html.Attributes exposing (cols, rows, align, id, placeholder, size)
 
 
@@ -38,16 +38,28 @@ view model =
           [ td [] [ textarea [ cols 80, rows 30, id "pageContent" ] [] ]
           ]
         , tr []
-          [ td [] [ input [ placeholder "Optional 1st choice", id "choiceOne", size 80 ] [] ]
+          [ td [] [ input [ placeholder "Page number", id "pageNumber" ] []
+                  , button [ id "createPage" ] [ text "Create page" ]
+                  , button [ id "modifyPage" ] [ text "Modify page" ]
+                  , button [ id "deletePage" ] [ text "Delete page" ]
+                  ]
+          ]
+        , hr [] []
+        , tr []
+          [ td [] [ text "Father page: "
+                  , select [ id "fatherPage" ] []
+                  , text "Child page: "
+                  , select [ id "childPage" ] []
+                  ]
           ]
         , tr []
-          [ td [] [ input [ placeholder "Optional 2nd choice", id "choiceTwo", size 80 ] [] ]
+          [ td [] [ input [ placeholder "Write here the choice that causes to go from father page to child page", id "linkDescription", cols 80 ] [] ]
           ]
         , tr []
-          [ td [] [ input [ placeholder "Page number", id "pageNumber" ] [] ]
-          ]
-        , tr []
-          [ td [] [ button [] [ text "Create page" ] ]
+          [ td [] [ button [ id "createLink" ] [ text "Create a new link" ]
+                  , button [ id "modifyLink" ] [ text "Modify link" ]
+                  , button [ id "deleteLink" ] [ text "Delete link" ]
+                  ]
           ]
         ]
 
